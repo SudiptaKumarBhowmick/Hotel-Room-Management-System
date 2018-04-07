@@ -1,0 +1,107 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using HotelRoomManagementSystem.Models;
+@model IPagedList<Hotel_Info>
+
+@{
+    ViewBag.Title = "Hotel Room List";
+}
+
+<head>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <h2 style="margin-top:20px;margin-bottom:20px;">Hotel Room Management System</h2>
+
+    @using (Html.BeginForm("Index", "User", FormMethod.Get))
+    {
+        <b>Search By: </b>@Html.RadioButton("SearchBy", "Room_No", true) <text>Room No</text>
+        @Html.RadioButton("SearchBy", "Room_type") <text>Room Category</text><br />
+        @Html.TextBox("SearchTerm") <input type="submit" value="search" class="btn btn-primary" />
+    }
+    <table class="table">
+        <tr>
+            <th>
+                <b style="font-size:20px;">Rooms</b>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (item.IsBooked)
+                {
+                    <td>
+                        <p><b>Room No</b> @Html.DisplayFor(modelItem => item.Room_No)</p>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Leave","Leave",new { id = item.Room_No })" class="btn btn-warning">Leave</a>
+                        <a href="@Url.Action("Details","Details",new { id = item.Room_No })" class="btn btn-info">Details</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <p><b>Room No</b> @Html.DisplayFor(modelItem => item.Room_No)</p>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Book","Book", new { id = item.Room_No})" class="btn btn-success">Book</a>
+                    </td>
+                }
+            </tr>
+        }
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="2">
+                    <b style="color:green;">No rows matches for this search criteria.</b>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new
+{
+    page,
+    SearchBy = Request.QueryString["SearchBy"],
+    SearchTerm = Request.QueryString["SearchTerm"]
+}), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })
+
+
+    <div class="chart">
+        <div class="box1 col-md-4">
+            <div class="icon" style="background: yellow;">
+                <i class="fa fa-home"></i>
+            </div>
+            <div class="text">
+                <h3>No. of Rooms</h3>
+                <h5>@Model.Count()</h5>
+            </div>
+        </div>
+
+        <div class="box1 col-md-4">
+            <div class="icon" style="background: green;">
+                <i class="fa fa-bed"></i>
+            </div>
+            <div class="text">
+                <h3>Room Booked</h3>
+                <h5>@Model.Count(x => x.IsBooked == true)</h5>
+            </div>
+        </div>
+
+        <div class="box1 col-md-4">
+            <div class="icon" style="background: #5BC4BE;">
+                <i class="fa fa-briefcase"></i>
+            </div>
+            <div class="text">
+                <h3>Room Available</h3>
+                <h5>@Model.Count(x => x.IsBooked == false)</h5>
+            </div>
+        </div>
+        </div>
+</body>
+
+

@@ -1,0 +1,73 @@
+﻿@model HotelRoomManagementSystem.Models.Guest_Info
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Guest_Info</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Guest_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guest_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Guest_addr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guest_addr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Guest_phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guest_phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Room_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room_No)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
