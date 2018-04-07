@@ -1,2 +1,0 @@
-http://www.c-sharpcorner.com/UploadFile/a20beb/generate-pdf-file-at-runtime-in-Asp-Net/
-http://asptipsandtricks.blogspot.com/2017/02/create-pdf-in-csharp.html
