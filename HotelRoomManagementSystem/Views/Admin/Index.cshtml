@@ -1,0 +1,79 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<HotelRoomManagementSystem.Models.Hotel_Info>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <p class="alert alert-success" id="successMessage">Successfully deleted the Room.</p>
+}
+
+@if (TempData["AlertMessage"] != null)
+{
+    <p class="alert alert-danger" id="successMessage">You can't delete this Room.</p>
+}
+
+<h2 style="margin-top:20px;margin-bottom:20px;">Hotel Room Management System</h2>
+<div class="btn btn-success" style="margin-bottom:10px; font-size:18px; color:black;">
+    <i class="fa fa-plus"></i><a href="@Url.Action("AddRoom","Admin")" style="color:black">Add New Room</a>
+</div>
+
+
+@using (Html.BeginForm("Index", "Admin", FormMethod.Get))
+{
+    <b>Search By: </b>@Html.RadioButton("SearchBy", "Room_No", true) <text>Room No</text>
+    @Html.RadioButton("SearchBy", "Room_type") <text>Room Category</text><br />
+    @Html.TextBox("SearchTerm") <input type="submit" value="search" class="btn btn-primary" />
+}
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<table class="table" style="margin-top:10px;">
+    <tr>
+        <th>
+            <b style="font-size:20px;">Rooms</b>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <p><b>Room No</b> @Html.DisplayFor(modelItem => item.Room_No)</p>
+            </td>
+            <td>
+                <p class="btn btn-warning">
+                    <i class="fa fa-pencil"></i> <a href="@Url.Action("EditRoom","Admin", new { id = item.Room_No })" style="color:black">Edit</a>
+                </p>
+                <p class="btn btn-success">
+                    <i class="fa fa-info-circle "></i> <a href="@Url.Action("Details","Admin", new { id = item.Room_No })" style="color:black">Details</a>
+                </p>
+                <p class="btn btn-danger">
+                    <i class="fa fa-trash"></i> <a href="@Url.Action("DeleteRoom","Admin", new { id = item.Room_No })" style="color:black">Delete</a>
+                </p>
+            </td>
+        </tr>
+    }
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="2">
+                <b style="color:green;">No rows matches for this search criteria.</b>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new
+{
+    page,
+    SearchBy = Request.QueryString["SearchBy"],
+    SearchTerm = Request.QueryString["SearchTerm"]
+}), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })
+
+

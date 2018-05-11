@@ -1,0 +1,149 @@
+﻿@{
+    ViewBag.Title = "AllInfo";
+}
+<head>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <h2>At a glance</h2>
+
+    @*pie chart*@
+    <div id="piechartGuestInfo" class="col-md-4"></div>
+    <div id="piechartHotelInfo" class="col-md-4"></div>
+    <div id="piechartUserInfo" class="col-md-4"></div>
+
+    <div id="curve_chart" class="col-md-10"></div>
+
+    @*chart*@
+    <div class="chart">
+        <div class="box1 col-md-3">
+            <div class="icon" style="background: yellow;">
+                <i class="fa fa-users"></i>
+            </div>
+            <div class="text">
+                <h3>No. of Guest</h3>
+                <h5>@ViewBag.TotalGuest</h5>
+            </div>
+        </div>
+
+        <div class="box1 col-md-3">
+            <div class="icon" style="background: green;">
+                <i class="fa fa-user"></i>
+            </div>
+            <div class="text">
+                <h3>Total Users</h3>
+                <h5>@ViewBag.User</h5>
+            </div>
+        </div>
+
+        <div class="box1 col-md-3">
+            <div class="icon" style="background: #5BC4BE;">
+                <i class="fa fa-bed"></i>
+            </div>
+            <div class="text">
+                <h3>Room Available</h3>
+                <h5>@ViewBag.notBooked</h5>
+            </div>
+        </div>
+
+        <div class="box1 col-md-3">
+            <div class="icon" style="background: #00C0EF;">
+                <i class="fa fa-sign-out"></i>
+            </div>
+            <div class="text">
+                <h3>Guest Leave</h3>
+                <h5>@ViewBag.leave</h5>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+// Load google charts
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(drawChart1);
+        google.charts.setOnLoadCallback(drawChart2);
+
+// chart for Guest Table
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Number of Guest'],
+  ['Already In', @ViewBag.alreadyIn],
+  ['Leave', @ViewBag.leave]
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'Guest Information', 'width':400, 'height':300};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechartGuestInfo'));
+  chart.draw(data, options);
+}
+
+// chart for Hotel Table
+function drawChart1() {
+    var data = google.visualization.arrayToDataTable([
+    ['Task', 'Number of Rooms'],
+    ['Booked', @ViewBag.Booked],
+    ['Not Booked', @ViewBag.notBooked]
+    ]);
+
+    // Optional; add a title and set the width and height of the chart
+    var options = { 'title': 'Hotel Information', 'width': 400, 'height': 300 };
+
+    // Display the chart inside the <div> element with id="piechart"
+    var chart = new google.visualization.PieChart(document.getElementById('piechartHotelInfo'));
+    chart.draw(data, options);
+}
+
+// chart for User Table
+function drawChart2() {
+    var data = google.visualization.arrayToDataTable([
+    ['Task', 'User'],
+    ['Admin', @ViewBag.Admin],
+    ['Total User', @ViewBag.User]
+    ]);
+
+    // Optional; add a title and set the width and height of the chart
+    var options = { 'title': 'User Information', 'width': 400, 'height': 300 };
+
+    // Display the chart inside the <div> element with id="piechart"
+    var chart = new google.visualization.PieChart(document.getElementById('piechartUserInfo'));
+    chart.draw(data, options);
+}
+
+    </script>
+
+    <script type="text/javascript">
+
+        // Load google charts
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart3);
+
+        //chart for
+        function drawChart3() {
+            var data = google.visualization.arrayToDataTable([
+              ['Month', 'TotalRevenue', 'TotalCost'],
+              ['December', 5000, 2000],
+              ['January', 6000, 2300],
+              ['February', 5600, 2280],
+              ['March', 7000, 2100]
+            ]);
+
+            var options = {
+                title: 'Company Performance',
+                curveType: 'function',
+                'width': 1170,
+                'height': 500
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+
+</body>

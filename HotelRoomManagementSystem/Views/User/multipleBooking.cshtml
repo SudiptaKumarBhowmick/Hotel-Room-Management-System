@@ -1,19 +1,17 @@
-﻿@using HotelRoomManagementSystem.Models;
-@model Guest_Info
+﻿@model HotelRoomManagementSystem.Models.Guest_Info
 
 @{
-    ViewBag.Title = "Book";
+    ViewBag.Title = "multipleBooking";
 }
 
-<h2>Book</h2>
+<h2>Multiple Room Booking</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("multipleBooking","User",FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Guest_Info</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -67,8 +65,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Room_No, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Room_No, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Room_No, "", new { @class = "text-danger" })
+                @*@Html.EditorFor(model => model.Room_No, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Room_No, "", new { @class = "text-danger" })*@
+                @foreach (var item in ViewBag.HotelList)
+                {
+                    <input type="checkbox" name="Room_No" id="Room_No" value="@item.Room_No" />
+                    <label for="Room_No">@item.Room_No</label>
+                }
             </div>
         </div>
 

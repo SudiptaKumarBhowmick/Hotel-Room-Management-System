@@ -1,0 +1,95 @@
+﻿@model HotelRoomManagementSystem.Models.AllGuestInfo
+
+@{
+    ViewBag.Title = "GuestDetails";
+}
+
+<h2>Guest Details</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Guest_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guest_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Guest_addr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guest_addr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Guest_phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guest_phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Room_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Room_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room_No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsBooked)
+        </dt>
+
+        <dd>
+            @if (Model.IsBooked)
+            {
+                @Html.Label("Check In")
+            }
+            else
+            {
+                @Html.Label("Check Out")
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+        @Html.ActionLink("Back to Guest List", "GuestList") |
+        @Html.ActionLink("Back to Dashboard", "Index")
+</p>

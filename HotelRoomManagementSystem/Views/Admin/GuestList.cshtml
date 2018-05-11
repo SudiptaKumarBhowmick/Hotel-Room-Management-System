@@ -1,0 +1,50 @@
+﻿@model IEnumerable<HotelRoomManagementSystem.Models.AllGuestInfo>
+
+@{
+    ViewBag.Title = "GuestList";
+}
+
+<body>
+    <h2>Guest List</h2>
+    @using (Html.BeginForm("GuestList", "Admin", FormMethod.Get))
+    {
+        <b>Search By: </b><br />
+        <text>Name: </text> @Html.TextBox("SearchByName") <br />
+        <text>City: </text> @Html.TextBox("SearchByCity")<input type="submit" value="search" class="btn btn-primary" />
+    }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Guest_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Room_No)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Guest_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room_No)
+                </td>
+                <td>
+                    <p class="btn btn-success">
+                        <i class="fa fa-info-circle"></i><a href="@Url.Action("GuestDetails","Admin", new { id = item.ID })" style="color:black">Details of Guest</a>
+                    </p>
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>

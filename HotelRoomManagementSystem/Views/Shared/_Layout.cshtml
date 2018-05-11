@@ -6,6 +6,63 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        body {
+            /*font-family: "Lato", sans-serif;*/
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenav a:hover {
+                    color: #510000;
+                    background-color: #DDDDDD;
+                }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+            .sidenav a i {
+                padding-right: 10px;
+            }
+
+        @@media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+        }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -18,14 +75,53 @@
                 </button>
                 @if (Session["User_Name"] != null)
                 {
-                    @Html.ActionLink("Hotel Room management system", "Index", "User", new { area = "" }, new { @class = "navbar-brand" })
+                    <div id="mySidenav" class="sidenav">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                        <a href="@Url.Action("Index", "User")"><i class="fa fa-home"></i>Dashboard</a>
+                        <a href="@Url.Action("GuestList", "User")"><i class="fa fa-user"></i>Guest List</a>
+                        <a href="@Url.Action("multipleBooking", "User")"><i class="fa fa-users"></i>Multiple Room Book</a>
+                        <a href="@Url.Action("profile", "User")"><i class="fa fa-user-secret"></i>Profile</a>
+                    </div>
+                    <span style="font-size:30px;position: absolute;left: 10px;top: 3px;color: white;opacity: 0.5;cursor:pointer" onclick="openNav()">&#9776; open</span>
+                    <div style="margin-left:30px;">
+                        @Html.ActionLink("Hotel Room management system", "Index", "User", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
+                    
                     <span style="position:absolute;right:30px;">
                         @Html.ActionLink("LogOut", "LogOut", "User", new { area = "" }, new { @class = "navbar-brand" })
                     </span>
-                    <span style="position:absolute;right:110px;">
+                    @*<span style="position:absolute;right:298px;">
+                        @Html.ActionLink("GuestList", "GuestList", "User", new { area = "" }, new { @class = "navbar-brand" })
+                    </span>*@
+                    @*<span style="position:absolute;right:170px;">
+                        @Html.ActionLink("Multiple Room Book", "multipleBooking", "User", new { area = "" }, new { @class = "navbar-brand" })
+                    </span>*@
+                    @*<span style="position:absolute;right:110px;">
                         @Html.ActionLink("profile", "profile", "User", new { area = "" }, new { @class = "navbar-brand" })
-                    </span>
+                    </span>*@
 
+                }
+                else if (Session["Admin_Name"] != null)
+                {
+                    <div id="mySidenav" class="sidenav">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                        <a href="@Url.Action("Index", "Admin")"><i class="fa fa-home"></i>Dashboard</a>
+                        <a href="@Url.Action("UserList", "UserListForAdmin")"><i class="fa fa-user"></i>User List</a>
+                        <a href="@Url.Action("GuestList", "Admin")"><i class="fa fa-users"></i>Guest List</a>
+                        <a href="@Url.Action("profile", "Admin")"><i class="fa fa-user-secret"></i>Profile</a>
+                        <a href="@Url.Action("AddNewAdmin", "Admin")"><i class="fa fa-user-plus"></i>Add New Admin</a>
+                        <a href="@Url.Action("AllInfo", "Admin")"><i class="fa fa-eye"></i>At a glance</a>
+                    </div>
+                    <span style="font-size:30px;position: absolute;left: 10px;top: 3px;color: white;opacity: 0.5;cursor:pointer" onclick="openNav()">&#9776; open</span>
+                    <div style="margin-left: 30px;">
+                        @Html.ActionLink("Hotel Room Management System", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
+                    @*@Html.ActionLink("User List", "UserList", "UserListForAdmin", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Guest List", "GuestList", "GuestListForAdmin", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("profile", "profile", "Admin", new { area = "" }, new { @class = "navbar-brand" })*@
+                    <div style="position:absolute; right:10px;top: 0;">
+                        @Html.ActionLink("Log Out", "LogOut", "Admin", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
                 }
                 else
                 {
@@ -46,5 +142,14 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "330px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
 </body>
 </html>

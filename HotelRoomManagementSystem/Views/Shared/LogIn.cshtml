@@ -1,26 +1,24 @@
-﻿@model HotelRoomManagementSystem.Models.User
-
+﻿@model HotelRoomManagementSystem.Models.AuthenticateUser
 @{
-    ViewBag.Title = "User LogIn";
+    ViewBag.Title = "LogIn";
 }
 
-<h2>User LogIn</h2>
-
+<h2>LogIn</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.User_ID)
+        @Html.HiddenFor(model => model.ID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.User_Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.User_Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User_Email, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
 

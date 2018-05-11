@@ -25,33 +25,46 @@
             <th>
                 <b style="font-size:20px;">Rooms</b>
             </th>
+            <th>
+                <b style="font-size:20px;">Room Category</b>
+            </th>
             <th></th>
         </tr>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                @if (item.IsBooked)
-                {
+        
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    @if (item.IsBooked)
+                    {
                     <td>
                         <p><b>Room No</b> @Html.DisplayFor(modelItem => item.Room_No)</p>
                     </td>
                     <td>
-                        <a href="@Url.Action("Leave","Leave",new { id = item.Room_No })" class="btn btn-warning">Leave</a>
-                        <a href="@Url.Action("Details","Details",new { id = item.Room_No })" class="btn btn-info">Details</a>
+                        @Html.DisplayFor(modelItem => item.Room_type)
                     </td>
-                }
-                else
-                {
+                    <td>
+                        <a href="@Url.Action("Leave","User",new { id=item.Room_No })" class="btn btn-warning">Leave</a>
+                        <a href="@Url.Action("Details","User",new { id=item.Room_No })" class="btn btn-info">Details</a>
+                    </td>
+                    }
+                    else
+                    {
                     <td>
                         <p><b>Room No</b> @Html.DisplayFor(modelItem => item.Room_No)</p>
                     </td>
                     <td>
-                        <a href="@Url.Action("Book","Book", new { id = item.Room_No})" class="btn btn-success">Book</a>
+                        @Html.DisplayFor(modelItem => item.Room_type)
                     </td>
-                }
-            </tr>
-        }
+                    <td>
+                        <a href="@Url.Action("singleBooking","User", new { id=item.Room_No})" class="btn btn-success">Book</a>
+                    </td>
+                    }
+                </tr>
+            }
+                
+
         @if (Model.Count() == 0)
         {
             <tr>
@@ -73,7 +86,7 @@
 
     <div class="chart">
         <div class="box1 col-md-4">
-            <div class="icon" style="background: yellow;">
+            <div class="usericon" style="background: yellow;">
                 <i class="fa fa-home"></i>
             </div>
             <div class="text">
@@ -83,7 +96,7 @@
         </div>
 
         <div class="box1 col-md-4">
-            <div class="icon" style="background: green;">
+            <div class="usericon" style="background: green;">
                 <i class="fa fa-bed"></i>
             </div>
             <div class="text">
@@ -93,7 +106,7 @@
         </div>
 
         <div class="box1 col-md-4">
-            <div class="icon" style="background: #5BC4BE;">
+            <div class="usericon" style="background: #5BC4BE;">
                 <i class="fa fa-briefcase"></i>
             </div>
             <div class="text">

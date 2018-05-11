@@ -9,24 +9,14 @@
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     max-width: 280px;
 }
-
 .chart{
-    margin-top: 70px;
-display: block;
-overflow: hidden;
+
 }
 .icon{
     width: 30%;
@@ -35,7 +25,17 @@ font-size: 46px;
 }
 .icon i{
     padding-bottom: 26px;
-    padding-left: 28px;
+    padding-left: 16px;
+}
+.usericon{
+    width: 30%;
+float: left;
+font-size: 46px;
+}
+.usericon i{
+padding-bottom: 19px;
+padding-left: 30px;
+padding-top: 16px;
 }
 .text{
     width: 70%;
@@ -48,3 +48,4 @@ background: #D2D6DE;
 .text h5{
     text-align:center;
 }
+

@@ -1,0 +1,49 @@
+﻿@model HotelRoomManagementSystem.Models.Hotel_Info
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details of Room</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Room_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room_No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Room_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsBooked)
+        </dt>
+
+        @if (Model.IsBooked)
+            {
+            <dd>
+                <h5>Booked</h5>
+            </dd>
+        }
+        else
+        {
+            <dd>
+                <h5>Not Booked</h5>
+            </dd>
+        }
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

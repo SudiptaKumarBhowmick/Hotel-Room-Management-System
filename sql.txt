@@ -1,0 +1,56 @@
+select * from AuthenticateUser
+
+drop table AuthenticateUser
+
+create table AuthenticateUser(
+ID int identity primary key not null,
+UserName nvarchar(50) not null,
+password nvarchar(50) not null,
+Email nvarchar(50) not null,
+UserLevel nvarchar(50) not null,
+Admin_ID int null,
+User_ID int null,
+foreign key (Admin_ID) references Admin(Admin_ID),
+foreign key (User_ID) references dbo.[User](User_ID)
+)
+
+Insert into AuthenticateUser(UserName,password,Email,UserLevel,Admin_ID) values('abcd','abc','abc@gmail.com','Level1',2)
+Insert into AuthenticateUser(UserName,password,Email,UserLevel,Admin_ID) values('noname','noname','name@gmail.com','Level1',1003)
+
+Insert into AuthenticateUser(UserName,password,Email,UserLevel,User_ID) values('sudipta','abc','abc@gmail.com','Level2',1)
+Insert into AuthenticateUser(UserName,password,Email,UserLevel,User_ID) values('samir','samir','samir@gmail.com','Level2',2)
+Insert into AuthenticateUser(UserName,password,Email,UserLevel,User_ID) values('sumon khan joy','shmon','sumon@gmail.com','Level2',3)
+
+update dbo.[User] set password = 'sudipta' where USER_ID = 1
+select * from dbo.[User]
+
+update dbo.[AuthenticateUser] set password = 'sudipta' where ID = 3
+
+
+
+
+
+
+
+insert into AllGuestInfo(Guest_Name,Guest_addr,Guest_phone,Country,City,age,Room_type,Guest_Id,Room_No,IsBooked) 
+values('khalid','rangpur','01611111111','bangladesh','rangpur',23,'single bed',8,101)
+insert into AllGuestInfo(Guest_Name,Guest_addr,Guest_phone,Country,City,age,Room_type,Guest_Id,Room_No,IsBooked) 
+values('dipto','jatrabari','01722222222','Bangladesh','jatrabari',15,'double bed',14,102)
+insert into AllGuestInfo(Guest_Name,Guest_addr,Guest_phone,Country,City,age,Room_type,Guest_Id,Room_No,IsBooked) 
+values('riad','dhaka','01722222222','Bangladesh','dhaka',25,'twin room',15,103)
+insert into AllGuestInfo(Guest_Name,Guest_addr,Guest_phone,Country,City,age,Room_type,Guest_Id,Room_No,IsBooked) 
+values('no man','no address','213245678','no country','no city',20,'single bed',16,201)
+insert into AllGuestInfo(Guest_Name,Guest_addr,Guest_phone,Country,City,age,Room_type,Guest_Id,Room_No,IsBooked) 
+values('samir','mirzapur','0172222112','Bangladesh','Tangail',16,'single bed',8,201)
+insert into AllGuestInfo(Guest_Name,Guest_addr,Guest_phone,Country,City,age,Room_type,Guest_Id,Room_No,IsBooked) 
+values('khalid','rangpur','01611111111','bangladesh','rangpur',23,'single bed',8,101)
+insert into AllGuestInfo(Guest_Name,Guest_addr,Guest_phone,Country,City,age,Room_type,Guest_Id,Room_No,IsBooked) 
+values('khalid','rangpur','01611111111','bangladesh','rangpur',23,'single bed',8,101)
+insert into AllGuestInfo(Guest_Name,Guest_addr,Guest_phone,Country,City,age,Room_type,Guest_Id,Room_No,IsBooked) 
+values('khalid','rangpur','01611111111','bangladesh','rangpur',23,'single bed',8,101)
+insert into AllGuestInfo(Guest_Name,Guest_addr,Guest_phone,Country,City,age,Room_type,Guest_Id,Room_No,IsBooked) 
+values('khalid','rangpur','01611111111','bangladesh','rangpur',23,'single bed',8,101)
+insert into AllGuestInfo(Guest_Name,Guest_addr,Guest_phone,Country,City,age,Room_type,Guest_Id,Room_No,IsBooked) 
+values('khalid','rangpur','01611111111','bangladesh','rangpur',23,'single bed',8,101)
+insert into AllGuestInfo(Guest_Name,Guest_addr,Guest_phone,Country,City,age,Room_type,Guest_Id,Room_No,IsBooked) 
+values('khalid','rangpur','01611111111','bangladesh','rangpur',23,'single bed',8,101)

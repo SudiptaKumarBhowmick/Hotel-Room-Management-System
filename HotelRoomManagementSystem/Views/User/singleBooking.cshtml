@@ -1,26 +1,20 @@
 ﻿@model HotelRoomManagementSystem.Models.Guest_Info
 
 @{
-    ViewBag.Title = "Leave";
-
-    if (ViewBag.multipleRoomLeave != null)
-    {
-        <p class="alert alert-warning" id="successMessage">Multiple(@ViewBag.multipleRoomLeave) Rooms have booked for this ID.</p>
-    }
+    ViewBag.Title = "singleBooking";
+    var id = ViewBag.RoomNo;
 }
 
-<h2>Leave</h2>
+<h2>Book Single Room</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Guest_Id)
-
         <div class="form-group">
             @Html.LabelFor(model => model.Guest_name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -72,24 +66,17 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Room_No, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Room_No, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Room_No, "", new { @class = "text-danger" })
+                @*@Html.EditorFor(model => model.Room_No, new { htmlAttributes = new { @class = "form-control" } })*@
+                <input type="text" name="Room_No" value="@id" class="form-control" />
+                @*@Html.ValidationMessageFor(model => model.Room_No, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
-        @*<div class="form-group">
-            <div class="col-md-offset-2 col-md-10">*@
-                @*<button type="submit" value="SingleRoomLeave" class="btn btn-default" onclick="location.href='@Url.Action("SingleRoomLeave", "User")'">Leave</button>*@
-                @*<input type="submit" value="SingleRoomLeave" @Url.Action("SingleRoomLeave") class="btn btn-default" />*@
-                @*<button type="submit" value="multipleRoomLeave" onclick="location.href='@Url.Action("multipleRoomLeave", "User")'" class="btn btn-default" @(ViewBag.multipleRoomLeave == null ? "disabled='disabled'" : "") >Multiple Room Leave</button>*@
-                @*<input type="submit" value="multipleRoomLeave" @Url.Action("multipleRoomLeave") class="btn btn-default" @(ViewBag.multipleRoomLeave == null ? "disabled='disabled'" : "")/>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Book" class="btn btn-default" />
             </div>
-        </div>*@
-
-        <form action="User" method="post">
-            <input type="submit" value="SingleRoomLeave" name="SingleRoomLeave" />
-            <input type="submit" value="multipleRoomLeave" name="multipleRoomLeave" />
-        </form>
+        </div>
     </div>
 }
 
